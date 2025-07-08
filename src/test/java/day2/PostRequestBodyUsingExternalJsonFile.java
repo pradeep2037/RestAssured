@@ -28,7 +28,7 @@ int userId;
 	    
 	    JSONObject data = new JSONObject(jt);
 	    
-	    
+	    //The server expects whenever we send data the data must be in json string format that's why we convert data into string
 
 		Response res = given()
 				.header("Authorization", "Bearer bcf44d05ff8c8bbae216ab0bc329ff5be8a694bd6b1053eb2e6379f19a47cc88")

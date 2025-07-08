@@ -49,7 +49,7 @@ public class ParsingJsonResponseData {
 	
 	
     //Searching for the title of the book in json
-//	@Test(priority = 3)
+	@Test(priority = 3)
 	public void validatingResponseData3() {
 		
 		Response res = given().contentType(ContentType.JSON)
@@ -64,6 +64,9 @@ public class ParsingJsonResponseData {
 		
 		for(int i=0;i<arr.length();i++){
 			
+//Now arr.getJSONObject(i).get("title") returns an Object, not a String — even though we know it's a string value in the JSON.
+//So we use .toString() to safely convert the value to string before using it in .equals().
+			
 			String bookTitle = arr.getJSONObject(i).get("title").toString();
 			
 			if(bookTitle.equals( "The Lord of the Rings")) {
@@ -77,7 +80,7 @@ public class ParsingJsonResponseData {
 	
 	
 	//Validating total price of books
-	@Test(priority = 4)
+//	@Test(priority = 4)
 	public void validatingResponseData4() {
 		
 		Response res = given().contentType(ContentType.JSON)
