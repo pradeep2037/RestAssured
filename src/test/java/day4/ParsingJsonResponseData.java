@@ -106,3 +106,116 @@ public class ParsingJsonResponseData {
 	}
 		
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Correct understanding (step-by-step)
+//🔹 Step 1: Initial response
+//Response res = given().when().get(...);
+//
+//👉 This is:
+//
+//A Response object (Java object)
+//It contains: status, headers, body
+//🔹 Step 2: Convert to String
+//String actualJsonFormat = res.asString();
+//
+//👉 Now you have:
+//
+//A String
+//That string contains JSON text
+//
+//Example:
+//
+//[
+//  { "title": "The Lord of the Rings" }
+//]
+//
+//⚠️ Important:
+//
+//This is just plain text, not JSON objects yet in Java
+//
+//🔹 Step 3: Convert String → JSON structure
+//JSONArray arr = new JSONArray(actualJsonFormat);
+//
+//👉 Now:
+//
+//String is parsed into JSONArray (Java object)
+//Inside it → JSONObject(s)
+//🔹 Step 4: Access value
+//arr.getJSONObject(i).get("title");
+//
+//👉 Returns:
+//
+//Object type (Java treats all JSON values as Object)
+//🔹 Step 5: Convert value → String
+//.toString()
+
+//===================================================================================================================
+//Why not use asString() again?
+//✅ asString() is only for Response object
+//Response res = given().when().get(...);
+//String body = res.asString();  // ✔ valid
+//
+//👉 Works because:
+//
+//res is a Response
+//asString() is a method of Response class
+//❌ But here you don’t have Response anymore
+//arr.getJSONObject(i).get("title")
+//
+//👉 This returns:
+//
+//Object (not Response)
+//
+//So this will NOT work:
+//
+//arr.getJSONObject(i).get("title").asString(); // ❌ ERROR
+//
+//👉 Because:
+//
+//Object class has no asString() method
+//✅ Why .toString() is used
+//String bookTitle = arr.getJSONObject(i).get("title").toString();
+//
+//👉 Because:
+//
+//Returned type = Object
+//We need String
+//toString() is available for every Java object
+//🧠 Simple rule
+//Situation	Method to use
+//Response → String	asString()
+//Object → String	toString()
+//===================================================================================================================
+//🔥 What’s really happening
+//🔹 1) Response → String (raw JSON text)
+//String actualJsonFormat = res.asString();
+//
+//👉 Now you have:
+//
+//"[{ \"title\": \"The Lord of the Rings\" }]"
+//This is just text
+//You can’t access fields like title from plain text
+//🔹 2) String → JSONArray (structured data)
+//JSONArray arr = new JSONArray(actualJsonFormat);
+//
+//👉 Now you have:
+//
+//A Java JSON structure
+//You can do:
+//arr.getJSONObject(i)
+//
+//👉 Without this step, you cannot loop or access keys

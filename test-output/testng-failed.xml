@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="day7.OAuth1Authentication">
+      <class name="day8.APIChainingGetUser">
         <methods>
-          <include name="oauth1Authentication"/>
+          <include name="getUser" invocation-numbers="0"/>
         </methods>
-      </class> <!-- day7.OAuth1Authentication -->
+      </class> <!-- day8.APIChainingGetUser -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
